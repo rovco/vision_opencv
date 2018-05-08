@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 project(image_geometry)
 
 find_package(catkin REQUIRED sensor_msgs)
-find_package(OpenCV 3.4.0 REQUIRED
+find_package(OpenCV 3.3.1 REQUIRED
         PATHS /usr/local
         NO_DEFAULT_PATH
 )
