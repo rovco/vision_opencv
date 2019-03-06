@@ -1,0 +1,17 @@
+# This is the CI spec for the vision_opencv
+
+build:: docker_image=rovco/debug_tools
+build:: in=build
+build: /citools/sysBuild --buildpart vision_opencv
+
+test:: docker_image=rovco/debug_tools
+test:: in=build
+test: /citools/sysTest --buildpart vision_opencv
+
+coverage:: docker_image=rovco/debug_tools
+coverage:: in=build
+coverage: /citools/sysCoverage --buildpart vision_opencv
+
+post_test:: docker_image=rovco/debug_tools
+post_test:: in=build
+post_test: /citools/plotMetrics.py metric_plots $API_USER $API_TOKEN $API_URL
