@@ -34,7 +34,14 @@ pipeline {
       post {
         always {
           junit allowEmptyResults: true, testResults: 'build/catkin_ws/build/**/*.xml'
-          benchmark altInputSchema: '', altInputSchemaLocation: "${env.JENKINS_HOME}/rvco_citools/links/benchmark.schema.json", inputLocation: 'build/catkin_ws/*.json', schemaSelection: 'customSchema', truncateStrings: true
+          script {
+            try {
+              benchmark altInputSchema: '', altInputSchemaLocation: "${env.JENKINS_HOME}/rvco_citools/links/benchmark.schema.json", inputLocation: 'build/catkin_ws/*.json', schemaSelection: 'customSchema', truncateStrings: true
+            } catch (err) {
+              echo "There are no benchmark"
+            }
+          }
+
           ansiColor('xterm') {
             sh "ciDocker post_test API_USER=$JENKINS_CREDS_USR API_TOKEN=$JENKINS_CREDS_PSW API_URL=$JOB_URL"
           }
