@@ -51,17 +51,6 @@ pipeline {
         }
       }
     }
-
-    stage( coverage ) {
-      steps{
-        ansiColor('xterm') {
-          sh "ciDocker coverage"
-          archiveArtifacts artifacts: 'build/catkin_ws/logs/vision_opencv/', onlyIfSuccessful: true
-          archiveArtifacts artifacts: 'build/catkin_ws/build/vision_opencv/vision_opencv_coverage/', onlyIfSuccessful: true
-        }
-      }
-
-    }
   }
 
 
