@@ -7,6 +7,7 @@ pipeline {
 
   environment {
     JENKINS_CREDS = credentials('Jenkins-API-Key')
+    NOTE=""
   }
 
   stages {
@@ -57,10 +58,16 @@ pipeline {
   // Notifications only.
   post {
     success {
-      slackSend color: 'good', message: "Successfully built ${env.BUILD_TAG}. Yay!"
+      script {
+        NOTE = sh ( script: "fingerPointer.py --repo source", returnStdout:true ).trim()
+      }
+      slackSend color: 'good', message: "Successfully built ${env.BUILD_TAG}. Yay!\n${NOTE}"
     }
     failure {
-      slackSend color: 'bad', message: "Failure building ${env.BUILD_TAG}.\n${env.BUILD_URL}"
+      script {
+        NOTE = sh ( script: "fingerPointer.py --repo source --poke", returnStdout:true ).trim()
+      }
+      slackSend color: 'bad', message: "Failure building ${env.BUILD_TAG}.\n${env.BUILD_URL}\n${NOTE}"
     }
   }
 
