@@ -55,8 +55,8 @@ pipeline {
   }
 
 
-  // Notifications only.
   post {
+    // Notifications only.
     success {
       script {
         NOTE = sh ( script: "fingerPointer.py --repo source", returnStdout:true ).trim()
@@ -68,6 +68,12 @@ pipeline {
         NOTE = sh ( script: "fingerPointer.py --repo source --poke", returnStdout:true ).trim()
       }
       slackSend color: 'bad', message: "Failure building ${env.BUILD_TAG}.\n${env.BUILD_URL}\n${NOTE}"
+    }
+    
+    //Clean workspace.
+    always {
+      echo 'Cleaning workspace'
+      deleteDir()
     }
   }
 
