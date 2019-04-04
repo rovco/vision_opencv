@@ -71,7 +71,7 @@ pipeline {
     }
     
     //Clean workspace.
-    always {
+    cleanup {
       echo 'Cleaning workspace'
       deleteDir()
     }
