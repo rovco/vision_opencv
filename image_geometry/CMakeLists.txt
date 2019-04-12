@@ -4,7 +4,7 @@ project(image_geometry)
 find_package(catkin REQUIRED sensor_msgs)
 
 set(OpenCV_DIR /usr/local/share/OpenCV)
-find_package(OpenCV 3.3.1 REQUIRED)
+find_package(OpenCV 3.4.5 REQUIRED)
 
 catkin_package(CATKIN_DEPENDS sensor_msgs
                DEPENDS OpenCV
