@@ -22,14 +22,14 @@ pipeline {
 
     stage( build ) {
       steps {
-        sh "ciDocker build"
+        sh "ciDocker build --drev melodic"
       }
     }
 
     stage( test ) {
       steps {
         ansiColor('xterm') {
-          sh "ciDocker test"
+          sh "ciDocker test --drev melodic"
         }
       }
       post {
@@ -69,7 +69,7 @@ pipeline {
       }
       slackSend color: 'bad', message: "Failure building ${env.BUILD_TAG}.\n${env.BUILD_URL}\n${NOTE}"
     }
-    
+
     //Clean workspace.
     cleanup {
       echo 'Cleaning workspace'
