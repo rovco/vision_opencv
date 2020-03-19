@@ -15,7 +15,7 @@ find_package(Boost REQUIRED)
 endif()
 
 set(OpenCV_DIR /usr/local/share/OpenCV)
-find_package(OpenCV 3.3.1 REQUIRED
+find_package(OpenCV 3.4.5 REQUIRED
   COMPONENTS
     opencv_core
     opencv_imgproc
