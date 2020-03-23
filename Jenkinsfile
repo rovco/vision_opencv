@@ -22,14 +22,14 @@ pipeline {
 
     stage( build ) {
       steps {
-        sh "ciDocker build --drev melodic"
+        sh "ciDocker build"
       }
     }
 
     stage( test ) {
       steps {
         ansiColor('xterm') {
-          sh "ciDocker test --drev melodic"
+          sh "ciDocker test"
         }
       }
       post {
